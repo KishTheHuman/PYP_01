@@ -1,34 +1,46 @@
+# ------------------- Customer_Login_F ----------------------------------
 
 
 # ------------------- Admin_Login_F ----------------------------------
 
+
 def Admin_login():
+    file1 = open("Logins.txt", "r")
+    lines = file1.readlines()
     A_userN = input("Enter Username: ")
     A_pwd = input("Enter your four digit code")
-    for line in open("Logins.txt", "r").readlines():
-        A_usercheck = line.split()
-        if A_userN == A_usercheck[0] and A_pwd == A_usercheck[1]:
-            print("\nUser Found! Welcome Admin.")
 
-        else:
-            print("User not found! Please try again")
-            Admin_login()
+    for line in lines:
+        [username, pin] = line.split()
+
+        if(A_userN == username and A_pwd == pin):
+            print("Welcome Back")
+            admin_surface_menu()
+            return
+
+    print("No match found. Try again")
+    admin_surface_menu()
 
 # ------------------------- Admin_registration_F ---------------------
+# /// NOTICE: IT DOES NOT SAVE UNTIL EXITING ENTIRE PROGRAM ///
 
 
 def admin_register():
     userN = input("\nSelect Username:")
     pwd = int(input("\nPlease enter a four digit code"))
     backtomenu = int(input("\n enter 0 to go back to main menu."))
-    if backtomenu == 0:
-        Main_Menu()
 
-    with open("Logins.txt", "a") as f:
-        f.write("\n")
-        f.write(userN)
-        f.write(" ")
-        f.write(str(pwd))
+    confirm = input("Are you sure? Y/N")
+
+    if(confirm == "Y"):
+
+        with open("Logins.txt", "a") as f:
+            f.write(userN)
+            f.write(" ")
+            f.write(str(pwd))
+            Main_Menu()
+    else:
+        Main_Menu()
 
 # ------------------Registered customer mode_Function------------------------
 
@@ -38,6 +50,7 @@ def registered_customer_menu():
     backtomenu = int(input("\n enter 0 to go back to main menu."))
     if backtomenu == 0:
         Main_Menu()
+
     else:
         print("Invalid choice please enter 0")
 
@@ -49,6 +62,7 @@ def new_customer_menu():
     backtomenu = int(input("\n enter 0 to go back to main menu."))
     if backtomenu == 0:
         Main_Menu()
+
     else:
         print("Invalid choice please enter 0")
 
