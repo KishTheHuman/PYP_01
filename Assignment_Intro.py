@@ -14,11 +14,11 @@ def Admin_login():
         [username, pin] = line.split()
 
         if(A_userN == username and A_pwd == pin):
-            print("Welcome Back")
+            print("Welcome Back.")
             admin_surface_menu()
             return
 
-    print("No match found. Try again")
+    print("No match found. Try again.")
     admin_surface_menu()
 
 # ------------------------- Admin_registration_F ---------------------
