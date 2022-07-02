@@ -1,24 +1,11 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # ------------------- Admin_Login_F ----------------------------------
 
 def Admin_login():
     A_userN = input("Enter Username: ")
     A_pwd = input("Enter your four digit code")
-    for line in open("Admin_Logins.txt", "r").readlines():
+    for line in open("Logins.txt", "r").readlines():
         A_usercheck = line.split()
         if A_userN == A_usercheck[0] and A_pwd == A_usercheck[1]:
             print("\nUser Found! Welcome Admin.")
@@ -37,7 +24,8 @@ def admin_register():
     if backtomenu == 0:
         Main_Menu()
 
-    with open("Admin_Logins.txt", "w") as f:
+    with open("Logins.txt", "a") as f:
+        f.write("\n")
         f.write(userN)
         f.write(" ")
         f.write(str(pwd))
@@ -92,8 +80,6 @@ def admin_surface_menu():  # Specific Menu for admins to login
             print("Invalid choice. Enter numbers 1-3.")
     exit
 
-    admin_surface_menu()
-
 # ----------------------------------- Main Menu_Function ---------------------------------------
 
 
@@ -115,6 +101,7 @@ def Main_Menu():
                 registered_customer_menu()
                 break
             elif choice == 4:
+                exit
                 break
             else:
                 print("Invalid choice. Enter numbers 0-4 please")

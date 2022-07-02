@@ -10,7 +10,7 @@ def admin_register():
 
     with open("Admin_Logins.txt", "w") as f:
         f.write(userN)
-        f.write(",")
+        f.write(" ")
         f.write(str(pwd))
 
 # Registered customer mode_Function
