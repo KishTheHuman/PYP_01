@@ -1,4 +1,4 @@
-# ------------------------- Viewing_Medicine_Details_F ---------------------
+# ------------------------- Viewing_Medicine_Details_F -------------------------------------------------------
 
 def View_meds():
 
@@ -17,11 +17,11 @@ def View_meds():
     if backtomenu != 0:
         print("Invalid choice. Enter (0)")
     else:
-        admin_inner_menu()
+        Main_Menu()
     return
 
 
-# ------------------------- Adding_Medicine_Details_F ---------------------
+# ------------------------- Adding_Medicine_Details_F ---------------------------------------------------------
 
 def Add_Meds():
 
@@ -93,30 +93,100 @@ def admin_inner_menu():
             print("Invalid choice. Enter numbers 0-7 please")
             break
     return
-# ------------------------- Customer_registration_F ---------------------
+# ------------------------- New_Customer_menu_F -----------------------------------------------------------------
+
+
+def new_Custo_meu():
+
+    print("What would you like to do?")
+    print("\nSelect choice:\nView Available Medicine (1)",
+          "\nRegister your details (2)", "\nExit to Main Menu (3)")
+
+    while True:
+        try:
+            choice = int(input("\nEnter Selection"))
+            if choice == 1:
+                View_meds()
+                break
+            elif choice == 2:
+                Custo_register()
+            elif choice == 3:
+                Main_Menu()
+                break
+            else:
+                print("Invalid choice. Enter numbers 1-3.")
+                Custo_menu()
+                break
+        except ValueError:
+            print("Invalid choice. Enter numbers 1-3.")
+            break
+
+    return
+
+# ------------------------- Customer_register_F ----------------------------------------------------------------
 
 
 def Custo_register():
-    CR_userN = input("\nSelect Username:")
-    CR_pwd = int(input("\nPlease enter a four digit code"))
-    backtomenu = int(input("\n enter 0 to save and go back to main menu."))
 
+    CR_userN = input("\nInput Username:")
+    CR_number = str(input("Enter Contact Number:"))
+    CR_address = (input("Enter Address"))
+    CR_email = input("Input Email:")
+    CR_gender = input("Input Gender (M/F)")
+    CR_dob = str(input("Date of birth (DD/MM/YYYY):"))
+
+    while True:
+        try:
+            CR_pwd = str(input("\nPlease input a four digit code:"))
+            CR_pwd_check = str(input("\nPlease confirm your four digit code:"))
+
+            if CR_pwd != CR_pwd_check:
+                print("Four digit code does not match! Try Again.")
+                Custo_register()
+                break
+
+            else:
+                print("Code Confirmed.")
+                break
+
+        except ValueError:
+            print("Invalid input enter four digits.")
+            break
+    backtomenu = int(input("\n enter 0 to save and go back to main menu."))
     confirm = input("Are you sure? Y/N")
 
     if(confirm == "Y"):
 
-        with open("Logins.txt", "a") as f:
+        with open("Cust_details.txt", "a") as f:
             f.write("\n")
             f.write(CR_userN)
             f.write(" ")
             f.write(str(CR_pwd))
-        Main_Menu()
+            f.write(" ")
+            f.write(str(CR_address))
+            f.write(" ")
+            f.write(str(CR_number))
+            f.write(" ")
+            f.write(str(CR_email))
+            f.write(" ")
+            f.write(str(CR_gender))
+            f.write(" ")
+            f.write(str(CR_dob))
+        Custo_menu()
     else:
-        Main_Menu()
-# ----------------------------------- Customer_menu_Function ---------------------------------------
+        Custo_menu()
+
+# ----------------------------------- Customer_menu_Function -----------------------------------------
 
 
-def Custo_menu():  # Specific Menu for admins to login
+def Custo_inner_menu():
+    print()
+
+
+# ----------------------------------- Customer_menu_Function ----------------------------------------
+
+
+def Custo_menu():
     print("\nWelcome to Customer Menu!")
     print("Select Customer Mode.")
     print("\n1. New Customer", "\n2. Registered Customer.",
@@ -126,7 +196,7 @@ def Custo_menu():  # Specific Menu for admins to login
         try:
             choice = int(input("\nEnter Selection"))
             if choice == 1:
-                Custo_register()
+                new_Custo_meu()
                 break
             elif choice == 2:
                 Custo_login()
@@ -143,11 +213,11 @@ def Custo_menu():  # Specific Menu for admins to login
             break
     return
 
-# ------------------- Customer_Login_F ----------------------------------
+# ------------------- Customer_Login_F ----------------------------------------------------------------
 
 
 def Custo_login():
-    file1 = open("Logins.txt", "r")
+    file1 = open("Custo_details.txt", "r")
     lines = file1.readlines()
     CL_userN = input("Enter Username: ")
     CL_pwd = input("Enter your four digit code")
@@ -163,7 +233,7 @@ def Custo_login():
     print("No match found. Try again.")
     Custo_menu()
 
-# ------------------- Admin_Login_F ----------------------------------
+# ------------------- Admin_Login_F ---------------------------------------------------------------------
 
 
 def Admin_login():
@@ -183,12 +253,12 @@ def Admin_login():
     print("No match found. Try again.")
     admin_surface_menu()
 
-# ------------------------- Admin_registration_F ---------------------
+# ------------------------- Admin_registration_F ---------------------------------------------------------
 
 
 def admin_register():
     AR_userN = input("\nSelect Username:")
-    AR_pwd = int(input("\nPlease enter a four digit code"))
+    AR_pwd = str(input("\nPlease enter a four digit code"))
     backtomenu = int(input("\n enter 0 save and go back to main menu."))
 
     confirm = input("Are you sure? Y/N")
@@ -204,7 +274,7 @@ def admin_register():
     else:
         Main_Menu()
 
-# ------------------Registered customer mode_Function------------------------
+# ------------------Registered customer mode_Function-------------------------------------------------------
 
 
 def registered_customer_menu():
@@ -216,7 +286,7 @@ def registered_customer_menu():
     else:
         print("Invalid choice please enter 0")
 
-# --------------------- New Customer mode_Function ----------------------------
+# --------------------- New Customer mode_Function ---------------------------------------------------------
 
 
 def new_customer_menu():
@@ -229,7 +299,7 @@ def new_customer_menu():
         print("Invalid choice please enter 0")
 
 
-# ------------------------------- Admin menu_Function ------------------------------------------
+# ------------------------------- Admin menu_Function -----------------------------------------------------
 
 
 def admin_surface_menu():  # Specific Menu for admins to login
@@ -257,7 +327,7 @@ def admin_surface_menu():  # Specific Menu for admins to login
             break
     return
 
-# ----------------------------------- Main Menu_Function ---------------------------------------
+# ----------------------------------- Main Menu_Function -------------------------------------------------------
 
 
 def Main_Menu():
