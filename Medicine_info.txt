@@ -1,5 +1,5 @@
-Medicine 1 
-Medicine 2 
-Medicine 3
-Medicine 4
-Medicine 5 
+test test test test
+
+200 Paracetemol 15/05/1999 10
+
+200 Painkiller 15/051999 RM10

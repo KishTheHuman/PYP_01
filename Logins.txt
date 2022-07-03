@@ -1,4 +1,4 @@
-Finn 1000
+Bate 1000
 Jack 2000
 Martin 3000
 Tom 4000
@@ -9,3 +9,4 @@ John 8000
 James 9000
 Akish 2222
 Martin 9905
+Finn 9905

@@ -157,21 +157,27 @@ def Custo_register():
 
     if(confirm == "Y"):
 
-        with open("Cust_details.txt", "a") as f:
-            f.write("\n")
-            f.write(CR_userN)
-            f.write(" ")
-            f.write(str(CR_pwd))
-            f.write(" ")
-            f.write(str(CR_address))
-            f.write(" ")
-            f.write(str(CR_number))
-            f.write(" ")
-            f.write(str(CR_email))
-            f.write(" ")
-            f.write(str(CR_gender))
-            f.write(" ")
-            f.write(str(CR_dob))
+        f = open("Logins.txt", "a")
+        f.write("\n")
+        f.write(CR_userN)
+        f.write(" ")
+        f.write(str(CR_pwd))
+        f.close()
+        f2 = open("Cust_Details.txt", "a")
+        f2.write("\n")
+        f2.write(CR_userN)
+        f2.write(",")
+        f2.write(str(CR_address))
+        f2.write(" ")
+        f2.write(str(CR_number))
+        f2.write(" ")
+        f2.write(str(CR_email))
+        f2.write(" ")
+        f2.write(str(CR_gender))
+        f2.write(" ")
+        f2.write(str(CR_dob))
+        f2.close()
+
         Custo_menu()
     else:
         Custo_menu()
@@ -217,10 +223,10 @@ def Custo_menu():
 
 
 def Custo_login():
-    file1 = open("Cust_Details.txt", "r")
+    file1 = open("Logins.txt", "r")
     lines = file1.readlines()
     CL_userN = input("Enter Username: ")
-    CL_pwd = input("Enter your four digit code")
+    CL_pwd = str(input("Enter your four digit code"))
 
     for line in lines:
         [username, pin] = line.split()
@@ -233,14 +239,14 @@ def Custo_login():
     print("No match found. Try again.")
     Custo_menu()
 
-# ------------------- Admin_Login_F ---------------------------------------------------------------------
+# ------------------- Admin_Login_F --------------------------------------------------------------------
 
 
 def Admin_login():
     file1 = open("Logins.txt", "r")
     lines = file1.readlines()
     AL_userN = input("Enter Username: ")
-    AL_pwd = input("Enter your four digit code")
+    AL_pwd = str(input("Enter your four digit code"))
 
     for line in lines:
         [username, pin] = line.split()
