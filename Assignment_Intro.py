@@ -1,4 +1,4 @@
-# ------------------------- Viewing_Medicine_Details_F -------------------------------------------------------
+# ------------------------- Viewing_Medicine_Details_F --------------------------------------------------------
 
 def View_meds():
 
@@ -217,7 +217,7 @@ def Custo_menu():
 
 
 def Custo_login():
-    file1 = open("Custo_details.txt", "r")
+    file1 = open("Cust_Details.txt", "r")
     lines = file1.readlines()
     CL_userN = input("Enter Username: ")
     CL_pwd = input("Enter your four digit code")
