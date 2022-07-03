@@ -1,5 +1,167 @@
+# ------------------------- Viewing_Medicine_Details_F ---------------------
+
+def View_meds():
+
+    with open("Medicine_info.txt", "r") as f:
+        f_contents = f.read()
+        print(f_contents)
+
+    while True:
+        try:
+            backtomenu = int(input("\n enter 0 to go back to main menu."))
+        except ValueError:
+            print("Invalid choice. Enter (0)")
+            continue
+        else:
+            break
+    if backtomenu != 0:
+        print("Invalid choice. Enter (0)")
+    else:
+        admin_inner_menu()
+    return
+
+
+# ------------------------- Adding_Medicine_Details_F ---------------------
+
+def Add_Meds():
+
+    Med_id = (input("\nEnter Medicine ID :"))
+    Med_name = (input("\nEnter Medicine Name :"))
+    Med_expiry = str(input("\nEnter Med Expiry Date: (DD/MM/YYYY) "))
+    Med_price = str(input("Enter Price :"))
+
+    confirm = input("Are you sure? Y/N")
+
+    if(confirm == "Y"):
+
+        with open("Medicine_info.txt", "a") as f:
+            f.write("\n")
+            f.write(Med_id)
+            f.write(" ")
+            f.write(Med_name)
+            f.write(" ")
+            f.write(str(Med_expiry))
+            f.write(" ")
+            f.write(str(Med_price))  # Write Currency together with PRICE
+        admin_inner_menu()
+    else:
+        admin_inner_menu()
+
+
+# ------------------------- Admin_Inner_Menu_F --------------------------------------------------------------------
+
+def admin_inner_menu():
+
+    print("\nWelcome to Admin's Menu!")
+    print("Please select task 1-6")
+    print("\nAdd Medicine Details (1)")
+    print("View Medicine Details (2)")
+    print("Modify Medicine Details (3)")
+    print("Delete Medicine Details (4)")
+    print("Search Medicine Details (5)")
+    print("View Customer orders (6)")
+    print("\nExit to Main Menu (7)")
+    while True:
+        try:
+            choice = int(input("\nEnter your choice."))
+            if choice == 1:
+                Add_Meds()
+                break
+            elif choice == 2:
+                View_meds()
+                break
+            elif choice == 3:
+                # Update_Med_Detail_F
+                break
+            elif choice == 4:
+                # Delete_Med_Detail_F
+                break
+            elif choice == 5:
+                # Search_Med_Detail_F
+                break
+            elif choice == 6:
+                # View_CustomerOrders_F
+                break
+            elif choice == 7:
+                Main_Menu()
+                break
+            else:
+                print("Invalid choice. Enter numbers 0-7 please")
+                break
+
+        except ValueError:
+            print("Invalid choice. Enter numbers 0-7 please")
+            break
+    return
+# ------------------------- Customer_registration_F ---------------------
+
+
+def Custo_register():
+    CR_userN = input("\nSelect Username:")
+    CR_pwd = int(input("\nPlease enter a four digit code"))
+    backtomenu = int(input("\n enter 0 to save and go back to main menu."))
+
+    confirm = input("Are you sure? Y/N")
+
+    if(confirm == "Y"):
+
+        with open("Logins.txt", "a") as f:
+            f.write("\n")
+            f.write(CR_userN)
+            f.write(" ")
+            f.write(str(CR_pwd))
+        Main_Menu()
+    else:
+        Main_Menu()
+# ----------------------------------- Customer_menu_Function ---------------------------------------
+
+
+def Custo_menu():  # Specific Menu for admins to login
+    print("\nWelcome to Customer Menu!")
+    print("Select Customer Mode.")
+    print("\n1. New Customer", "\n2. Registered Customer.",
+          "\n3. Exit to Main menu.")
+
+    while True:
+        try:
+            choice = int(input("\nEnter Selection"))
+            if choice == 1:
+                Custo_register()
+                break
+            elif choice == 2:
+                Custo_login()
+                break
+            elif choice == 3:
+                Main_Menu()
+                break
+            else:
+                print("Invalid choice. Enter numbers 1-3.")
+                Custo_menu()
+                break
+        except ValueError:
+            print("Invalid choice. Enter numbers 1-3.")
+            break
+    return
+
 # ------------------- Customer_Login_F ----------------------------------
 
+
+def Custo_login():
+    file1 = open("Logins.txt", "r")
+    lines = file1.readlines()
+    CL_userN = input("Enter Username: ")
+    CL_pwd = input("Enter your four digit code")
+
+    for line in lines:
+        [username, pin] = line.split()
+
+        if(CL_userN == username and CL_pwd == pin):
+            print("Welcome Back.")
+            Custo_menu()
+            return
+
+    print("No match found. Try again.")
+    Custo_menu()
 
 # ------------------- Admin_Login_F ----------------------------------
 
@@ -7,38 +169,38 @@
 def Admin_login():
     file1 = open("Logins.txt", "r")
     lines = file1.readlines()
-    A_userN = input("Enter Username: ")
-    A_pwd = input("Enter your four digit code")
+    AL_userN = input("Enter Username: ")
+    AL_pwd = input("Enter your four digit code")
 
     for line in lines:
         [username, pin] = line.split()
 
-        if(A_userN == username and A_pwd == pin):
-            print("Welcome Back.")
-            admin_surface_menu()
+        if(AL_userN == username and AL_pwd == pin):
+            print("Login Succesfull.")
+            admin_inner_menu()
             return
 
     print("No match found. Try again.")
     admin_surface_menu()
 
 # ------------------------- Admin_registration_F ---------------------
-# /// NOTICE: IT DOES NOT SAVE UNTIL EXITING ENTIRE PROGRAM ///
 
 
 def admin_register():
-    userN = input("\nSelect Username:")
-    pwd = int(input("\nPlease enter a four digit code"))
-    backtomenu = int(input("\n enter 0 to go back to main menu."))
+    AR_userN = input("\nSelect Username:")
+    AR_pwd = int(input("\nPlease enter a four digit code"))
+    backtomenu = int(input("\n enter 0 save and go back to main menu."))
 
     confirm = input("Are you sure? Y/N")
 
     if(confirm == "Y"):
 
         with open("Logins.txt", "a") as f:
-            f.write(userN)
+            f.write("\n")
+            f.write(AR_userN)
             f.write(" ")
-            f.write(str(pwd))
-            Main_Menu()
+            f.write(str(AR_pwd))
+        Main_Menu()
     else:
         Main_Menu()
 
@@ -67,11 +229,10 @@ def new_customer_menu():
         print("Invalid choice please enter 0")
 
 
-# ------------------------------- Admin mode_Function ------------------------------------------
+# ------------------------------- Admin menu_Function ------------------------------------------
 
 
 def admin_surface_menu():  # Specific Menu for admins to login
-    print("\nWelcome to Admin Menu!")
     print("Select Admin Mode.")
     print("\n1. New", "\n2. Registered Admin.", "\n3. Exit to Main menu.")
 
@@ -90,18 +251,20 @@ def admin_surface_menu():  # Specific Menu for admins to login
             else:
                 print("Invalid choice. Enter numbers 1-3.")
                 admin_surface_menu()
+                break
         except ValueError:
             print("Invalid choice. Enter numbers 1-3.")
-    exit
+            break
+    return
 
 # ----------------------------------- Main Menu_Function ---------------------------------------
 
 
 def Main_Menu():
     print("\nWelcome to System's Menu!")
-    print("Please select 1-3 for service mode")
-    print("\n1. Admin", "\n2. New Customer", "\n3. Registered Customer")
-    print("4. Exit")
+    print("Please select 1/2 for service mode")
+    print("\n1. Admin", "\n2. Customer")
+    print("3. Exit Program")
     while True:
         try:
             choice = int(input("\nEnter your choice."))
@@ -109,19 +272,19 @@ def Main_Menu():
                 admin_surface_menu()
                 break
             elif choice == 2:
-                new_customer_menu()
+                Custo_menu()
                 break
             elif choice == 3:
-                registered_customer_menu()
-                break
-            elif choice == 4:
                 exit
                 break
+
             else:
-                print("Invalid choice. Enter numbers 0-4 please")
+                print("Invalid choice. Enter numbers 0-3 please")
                 Main_Menu()
+                break
         except ValueError:
-            print("Invalid choice. Enter numbers 0-4 please")
+            print("Invalid choice. Enter numbers 0-3 please")
+            break
     exit
 
 
